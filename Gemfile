@@ -33,6 +33,12 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# devise gem
+gem 'devise'
+
+# omniaouth google auth
+gem 'omniauth-google-oauth2'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
