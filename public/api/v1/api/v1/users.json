@@ -5,12 +5,21 @@
   "resourcePath": "users",
   "apis": [
     {
-      "path": "/api/v1/users/list_trainer.json",
+      "path": "/api/v1/users/profile.json",
       "operations": [
         {
-          "summary": "Returns all posts",
-          "notes": "Notes...",
-          "nickname": "Api::V1::Users#list_trainer",
+          "summary": "Returns user profile",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "id",
+              "type": "integer",
+              "description": "User Id",
+              "required": true
+            }
+          ],
+          "notes": "profile of the user",
+          "nickname": "Api::V1::Users#profile",
           "method": "get"
         }
       ]

@@ -1,0 +1,106 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000",
+  "resourcePath": "comments",
+  "apis": [
+    {
+      "path": "/api/v1/comments/{id}.json",
+      "operations": [
+        {
+          "summary": "Update Comments",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Comment ID",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "comment[title]",
+              "type": "string",
+              "description": "Title",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "comment[task_id]",
+              "type": "integer",
+              "description": "Task ID",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Comments#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/comments/{id}.json",
+      "operations": [
+        {
+          "summary": "Delete Comment",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Comment Id",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Comments#destroy",
+          "method": "delete"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/comments.json",
+      "operations": [
+        {
+          "summary": "Create Comments",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "comment[title]",
+              "type": "string",
+              "description": "Title",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "comment[task_id]",
+              "type": "integer",
+              "description": "Task ID",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Comments#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/comments.json",
+      "operations": [
+        {
+          "summary": "Returns comment details",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "id",
+              "type": "integer",
+              "description": "Comment Id",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Comments#index",
+          "method": "get"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

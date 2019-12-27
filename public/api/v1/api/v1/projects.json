@@ -1,0 +1,120 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000",
+  "resourcePath": "projects",
+  "apis": [
+    {
+      "path": "/api/v1/projects/{id}.json",
+      "operations": [
+        {
+          "summary": "Update Projects",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Project ID",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "project[name]",
+              "type": "string",
+              "description": "Name",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "project[description]",
+              "type": "string",
+              "description": "Description",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "project[user_id]",
+              "type": "string",
+              "description": "User id who creates the project",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Projects#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/projects/{id}.json",
+      "operations": [
+        {
+          "summary": "Delete Project",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Project Id",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Projects#destroy",
+          "method": "delete"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/projects.json",
+      "operations": [
+        {
+          "summary": "Create Projects",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "project[name]",
+              "type": "string",
+              "description": "Name",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "project[description]",
+              "type": "string",
+              "description": "Description",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "project[user_id]",
+              "type": "string",
+              "description": "User id who creates the project",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Projects#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/projects.json",
+      "operations": [
+        {
+          "summary": "Returns project details",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "id",
+              "type": "integer",
+              "description": "Project Id",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Projects#index",
+          "method": "get"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

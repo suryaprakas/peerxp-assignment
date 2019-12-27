@@ -39,6 +39,12 @@ gem 'devise'
 # omniaouth google auth
 gem 'omniauth-google-oauth2'
 
+# cancan gem
+gem "cancan"
+# Rabl gem
+gem 'rabl'
+# Also add either `oj` or `yajl-ruby` as the JSON parser
+gem 'oj'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 

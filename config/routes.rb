@@ -12,9 +12,43 @@ Rails.application.routes.draw do
 
       resources :users do
         collection do
-          get :list_trainer
+          get :profile
         end
       end
+
+      resources :projects do
+        member do
+          patch :update
+          delete :destroy
+        end
+        collection do
+          post :create
+          get :index
+        end
+      end
+
+      resources :tasks do
+        member do
+          patch :update
+          delete :destroy
+        end
+        collection do
+          post :create
+          get :index
+        end
+      end
+
+      resources :comments do
+        member do
+          patch :update
+          delete :destroy
+        end
+        collection do
+          post :create
+          get :index
+        end
+      end
+
     end
   end
 

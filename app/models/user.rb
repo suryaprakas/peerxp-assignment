@@ -10,6 +10,7 @@ class User < ApplicationRecord
       user.first_name = auth.info.first_name
       user.last_name = auth.info.last_name
       user.email = auth.info.email
+      user.password = "Welcome#1234"
       user.encrypted_password = "Welcome#1234"
       # Access_token is used to authenticate request made from the rails application to the google server
       user.google_token = auth.credentials.token
@@ -17,7 +18,6 @@ class User < ApplicationRecord
       # Note: Refresh_token is only sent once during the first request
       refresh_token = auth.credentials.refresh_token
       user.google_refresh_token = refresh_token if refresh_token.present?
-      debugger
       user.save!
     end
   end

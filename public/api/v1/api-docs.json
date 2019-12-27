@@ -4,8 +4,24 @@
   "basePath": "http://localhost:3000",
   "apis": [
     {
+      "path": "/api/v1/user_sessions.{format}",
+      "description": "Users Sessions"
+    },
+    {
       "path": "/api/v1/api/v1/users.{format}",
       "description": "Users Manager"
+    },
+    {
+      "path": "/api/v1/api/v1/projects.{format}",
+      "description": "Projects Management"
+    },
+    {
+      "path": "/api/v1/api/v1/tasks.{format}",
+      "description": "Tasks Management"
+    },
+    {
+      "path": "/api/v1/api/v1/comments.{format}",
+      "description": "Comments Management"
     }
   ],
   "authorizations": null

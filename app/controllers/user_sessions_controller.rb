@@ -1,5 +1,6 @@
 class UserSessionsController < ApplicationController
 
+  skip_before_action :verify_authenticity_token  
   swagger_controller :user_sessions, 'Users Sessions'
 
   swagger_api :sign_up do
@@ -56,7 +57,7 @@ class UserSessionsController < ApplicationController
       status = :not_found
     end
 
-    redirect_url = "http://localhost:3000/auth/saml/callback"
+    redirect_url = "http://localhost:3000/auth"
     redirect_to("#{redirect_url}?saml_code=#{saml_code}", status: status)
   end
 end
