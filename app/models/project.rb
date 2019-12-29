@@ -5,4 +5,5 @@ class Project < ApplicationRecord
 
   #associations
   belongs_to :user
+  has_many :tasks
 end

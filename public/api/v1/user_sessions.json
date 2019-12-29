@@ -5,47 +5,7 @@
   "resourcePath": "user_sessions",
   "apis": [
     {
-      "path": "/user_sessions/sign_up.json",
-      "operations": [
-        {
-          "summary": "Sign UP",
-          "parameters": [
-            {
-              "paramType": "form",
-              "name": "user[email]",
-              "type": "string",
-              "description": "Email",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "user[first_name]",
-              "type": "string",
-              "description": "First name",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "user[last_name]",
-              "type": "string",
-              "description": "Last name",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "user[password]",
-              "type": "password",
-              "description": "Password",
-              "required": true
-            }
-          ],
-          "nickname": "UserSessions#sign_up",
-          "method": "post"
-        }
-      ]
-    },
-    {
-      "path": "/user_sessions.json",
+      "path": "/users/sign_in.json",
       "operations": [
         {
           "summary": "Sign in a user to the application and returns back authentication token",
@@ -83,7 +43,7 @@
       ]
     },
     {
-      "path": "/user_sessions/{id}.json",
+      "path": "/users/sign_out.json",
       "operations": [
         {
           "summary": "Signout a user",
@@ -101,6 +61,77 @@
           ],
           "nickname": "UserSessions#destroy",
           "method": "delete"
+        }
+      ]
+    },
+    {
+      "path": "/saml_signin.json",
+      "operations": [
+        {
+          "summary": "Pass the saml code to sign_in",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "code",
+              "type": "string",
+              "description": "Saml code",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 403,
+              "responseModel": null,
+              "message": "Forbidden"
+            }
+          ],
+          "nickname": "UserSessions#saml_signin",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/sign_up.json",
+      "operations": [
+        {
+          "summary": "Sign UP",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "user[email]",
+              "type": "string",
+              "description": "Email",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[first_name]",
+              "type": "string",
+              "description": "First name",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[last_name]",
+              "type": "string",
+              "description": "Last name",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[password]",
+              "type": "password",
+              "description": "Password",
+              "required": true
+            }
+          ],
+          "nickname": "UserSessions#sign_up",
+          "method": "post"
         }
       ]
     }

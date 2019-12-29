@@ -63,6 +63,16 @@ class Api::V1::TasksController < ApplicationController
       render json: { message: "Task Deleted successfully"} , status: :ok
     end
 
+    swagger_api :comments do
+      summary 'Comments of the task'
+      param :path, :id, :integer, :required, 'Task Id'
+    end
+  
+    def comments
+      @task = Task.where(id: params[:id]).first
+      render :index , status: :ok
+    end
+
     private
 
     def task_params

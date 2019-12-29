@@ -1,5 +1,6 @@
-class UserSessionsController < ApplicationController
+class UserSessionsController < Devise::SessionsController
 
+  skip_before_action :authenticate_user_token!, :authenticate_user!, only: [:create, :sign_up, :saml_signin]
   skip_before_action :verify_authenticity_token  
   swagger_controller :user_sessions, 'Users Sessions'
 
@@ -12,7 +13,8 @@ class UserSessionsController < ApplicationController
   end
 
   def sign_up
-    @user = User.create_user(params)
+    @user = User.new(user_params)
+    @user.password = params[:user][:password]
     if @user.save!
       render json: { user_details: @user}, status: :created
     else
@@ -45,6 +47,29 @@ class UserSessionsController < ApplicationController
     head :ok
   end
 
+  swagger_api :saml_signin do
+    summary 'Pass the saml code to sign_in'
+    param :form, :code, :string, :required, 'Saml code'
+    response :ok
+    response :forbidden
+  end
+
+  def saml_signin
+    code = params[:code]
+    status, result = User.from_saml_code(code)
+    if status
+      sign_in(result, result)
+      render json: { api_key: result.generate_api_key }, status: :created
+    else
+      if result.present?
+        message = "#{result['error']} - #{result['error_description']}"
+        render json: { error: message }, status: :bad_request
+      else
+        render json: { error: _('views.exceptions.not_found') }, status: :unauthorized
+      end
+    end
+  end
+
   def googleAuth
     # Get access tokens from the google server
     access_token = request.env["omniauth.auth"]
@@ -57,7 +82,13 @@ class UserSessionsController < ApplicationController
       status = :not_found
     end
 
-    redirect_url = "http://localhost:3000/auth"
+    redirect_url = "http://localhost:3000/auth/saml/"
     redirect_to("#{redirect_url}?saml_code=#{saml_code}", status: status)
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email)
   end
 end

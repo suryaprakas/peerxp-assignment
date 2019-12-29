@@ -93,6 +93,25 @@
       ]
     },
     {
+      "path": "/api/v1/tasks/{id}/comments.json",
+      "operations": [
+        {
+          "summary": "Comments of the task",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Task Id",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Tasks#comments",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "path": "/api/v1/tasks.json",
       "operations": [
         {

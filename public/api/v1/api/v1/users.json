@@ -9,15 +9,6 @@
       "operations": [
         {
           "summary": "Returns user profile",
-          "parameters": [
-            {
-              "paramType": "query",
-              "name": "id",
-              "type": "integer",
-              "description": "User Id",
-              "required": true
-            }
-          ],
           "notes": "profile of the user",
           "nickname": "Api::V1::Users#profile",
           "method": "get"

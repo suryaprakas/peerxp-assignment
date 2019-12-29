@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # controllers: { sessions: 'user_sessions' }
+  devise_for :users,
+  controllers: { sessions: 'user_sessions' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  # Routes for Google authentication
-  get 'auth/:provider/callback', to: 'user_sessions#googleAuth'
-  get 'auth/failure', to: redirect('/')
+  devise_scope :user do
+    post 'create' => 'user_sessions#create'
+    post 'saml_signin' => 'user_sessions#saml_signin'
+    post 'sign_up' => 'user_sessions#sign_up'
+    # Routes for Google authentication
+    get 'auth/:provider/callback', to: 'user_sessions#googleAuth'
+    get 'auth/failure', to: redirect('/')
+  end
   
   namespace :api do
     namespace :v1 do
@@ -20,6 +25,7 @@ Rails.application.routes.draw do
         member do
           patch :update
           delete :destroy
+          get :tasks
         end
         collection do
           post :create
@@ -31,6 +37,7 @@ Rails.application.routes.draw do
         member do
           patch :update
           delete :destroy
+          get :comments
         end
         collection do
           post :create
@@ -55,6 +62,8 @@ Rails.application.routes.draw do
   resources :user_sessions do
     collection do
       post :sign_up
+      post :saml_signin
+      post :log_in
     end
   end
 

@@ -6,11 +6,10 @@ class Api::V1::UsersController < ApplicationController
     swagger_api :profile do
       summary 'Returns user profile'
       notes 'profile of the user'
-      param :query, :id, :integer, :required, 'User Id'
     end
 
     def profile
-      @user = User.where(id: params[:id]).first
+      @user = current_user
       render :profile, status: :ok
     end
 

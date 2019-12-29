@@ -4,6 +4,7 @@ class Task < ApplicationRecord
 
   #associations
   belongs_to :project
+  has_many :comments
 
   module Status
     FRESH = 'fresh'.freeze

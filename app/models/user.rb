@@ -27,7 +27,7 @@ class User < ApplicationRecord
   # Returns cached string.
   def generate_saml_key
     saml_key = formulate_saml_key
-    Rails.cache.write(saml_key, self.id, :expires_in => 86400)
+    Rails.cache.write(saml_key, self.id, :expires_in => 1.day)
     saml_key
   end
 
@@ -42,7 +42,7 @@ class User < ApplicationRecord
     # api_key = formulate_key
     # Write it into cache
     Rails.cache.write(User.cached_api_key(api_key),
-     self.authentication_token,
+     self.id,
       :expires_in => 86400)
     # Return the hash
     api_key
@@ -52,10 +52,29 @@ class User < ApplicationRecord
     "api/#{api_key}"
   end
 
-  def create_user(params)
-    user = User.new(user_params)
-    user.password = params[:password]
-    user.encrypted_password = params[:password]
+  # Public: For retrieving user from saml_code
+  #
+  # saml_code  : string.
+  #
+  # Returns a boolean and user object.
+  def self.from_saml_code(saml_key)
+    id = Rails.cache.read saml_key
+    Rails.cache.delete saml_key if id.present?
+    user = User.where(id: id).first
+    return user.present?, user
+  end
+
+  def self.from_api_key(api_key, renew = false)
+    cached_key = self.cached_api_key(api_key)
+    id = Rails.cache.read cached_key
+    if id
+      user = User.find_by_id id
+      # Renew the token
+      if renew && user
+        Rails.cache.write cached_key, id,
+          expires_in: 86400
+      end
+    end
     user
   end
 
@@ -69,10 +88,6 @@ class User < ApplicationRecord
   def formulate_key
     str = OpenSSL::Digest::SHA256.digest("#{SecureRandom.uuid}_#{self.id}_#{Time.now.to_i}")
     Base64.encode64(str).gsub(/[\s=]+/, "").tr('+/','-_')
-  end
-
-  def user_params
-    params.require(:user).permit(:first_name, :last_name, :email)
   end
 
 end

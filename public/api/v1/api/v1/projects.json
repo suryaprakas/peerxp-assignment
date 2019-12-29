@@ -30,13 +30,6 @@
               "type": "string",
               "description": "Description",
               "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "project[user_id]",
-              "type": "string",
-              "description": "User id who creates the project",
-              "required": true
             }
           ],
           "nickname": "Api::V1::Projects#update",
@@ -64,6 +57,25 @@
       ]
     },
     {
+      "path": "/api/v1/projects/{id}/tasks.json",
+      "operations": [
+        {
+          "summary": "Tasks of the project",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Project Id",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Projects#tasks",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "path": "/api/v1/projects.json",
       "operations": [
         {
@@ -82,13 +94,6 @@
               "type": "string",
               "description": "Description",
               "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "project[user_id]",
-              "type": "string",
-              "description": "User id who creates the project",
-              "required": true
             }
           ],
           "nickname": "Api::V1::Projects#create",
